@@ -1,50 +1,61 @@
 # Experimental Flow
 
-## Goal
+## 目标
 
-Design an electrically programmable excitonic metasurface that steers reflected light by tuning the complex reflection coefficient of each metapixel.
+设计一个电控可编程 excitonic metasurface，通过 gate voltage 调节每个 metapixel 的 complex reflection coefficient，使反射光在目标角度形成主瓣。这个方案的重点不是复现主论文图，而是把已验证的 electrically tunable strong coupling 机制移植到 excitonic beam steering 场景中。
 
-## Main Logic
+## 物理链条
 
-The starting paper already shows that a monolayer MoSe2 excitonic metasurface can control reflected wavefronts. The limitation is that bare-exciton phase tuning can be tied to amplitude loss. This project transfers gate-tunable strong coupling from hybrid-2D excitonic metasurfaces into the beam-steering setting.
-
-The intended physical chain is:
+主论文 A 已经证明 monolayer MoSe2 active vdW metasurface 可以调控反射波前。这里的升级点是把 bare-exciton 调制单元替换为 gate-tunable exciton-polariton 单元：
 
 `Vg -> gamma_x(Vg) -> r(Vg)=|r|exp(i phi) -> phi_j=k0 x_j sin(theta0) -> far-field peak at theta0`
 
-## Device Concept
+其中 `gamma_x(Vg)` 表示 gate-induced exciton linewidth / non-radiative decay，`r(Vg)` 是每个像素的复反射系数，`phi_j` 是阵列位置 `x_j` 对应的目标相位。
 
-Baseline structure:
+## 器件概念
+
+主线结构：
 
 - non-local dielectric metasurface
 - hBN encapsulation
 - monolayer MoSe2 or WS2
-- transparent or patterned top gate
+- transparent top gate or patterned local gates
 - bottom gate / substrate
 
-Supporting extension:
+支撑拓展：
 
-- two-layer TMD stack such as WS2 / MoSe2 separated by hBN
-- used to improve amplitude stability while retaining phase control
+- hBN-separated WS2 / MoSe2 two-layer TMD stack
+- 作用是改善相位扫描时的 amplitude stability
+- 在本项目中对应第五张模拟图，不作为主创新替代项
 
-## Measurement Loop
+## 测量流程
 
-1. Sweep photon energy and gate voltage to map reflection `R(E,Vg)`.
-2. Fit the response with a coupled-oscillator model and extract `r(Vg)`.
-3. Select target beam angles such as 0, 10, and 20 degrees.
-4. Convert each target angle to a phase gradient and inverse-design a gate-voltage profile.
-5. Measure the far-field reflection in a Fourier plane and check whether the main lobe reaches the target angle.
+1. 用 tunable laser 扫 photon energy，并同步扫 gate voltage，得到 `R(E,Vg)`。
+2. 用 coupled-oscillator model 拟合或解释谱线变化，提取 design energy 下的 `r(Vg)`。
+3. 选择目标偏转角，例如 `0/10/20 deg`。
+4. 用 `phi_j=k0 x_j sin(theta0)` 生成目标相位梯度。
+5. 通过 `r(Vg)` 的相位反查每个 metapixel 的 gate voltage。
+6. 在 Fourier plane 中测 reflected far field，检查主瓣是否移动到目标角。
 
-## What Python Checks Before the Experiment
+## Python 预验证
 
-Python does not replace the experiment. It checks whether the proposed design has a coherent control chain:
+Python 模拟检查五件事：
 
-- gate tuning can visibly alter the strong-coupling reflection map
-- a metapixel can sweep useful complex reflection phases
-- a desired angle can be translated into a voltage profile
-- the voltage-derived phase profile steers a far-field beam
-- the two-layer TMD design can improve amplitude stability over a useful phase range
+- gate voltage 是否能把 coupled-oscillator reflection map 从清晰强耦合特征推向高损耗弱耦合状态
+- design energy 下 `r(Vg)` 是否提供可用的 amplitude / phase 控制窗口
+- 目标角是否能反推出可施加的 gate-voltage profile
+- 由这些 voltage 选出的 phase profile 是否能在 array factor 中产生目标 far-field peak
+- two-layer amplitude-stabilized design 是否比 one-layer TMD 在相位扫描时更稳
 
-## Boundary
+## 判据
 
-The simulations use representative, physically interpretable parameters. They are design simulations, not measured spectra and not COMSOL/FDTD full-wave calculations.
+项目级判据是机制链自洽，而不是声称实验已经实现。当前 Python 结果给出：
+
+- target `0 deg` 对应 far-field peak `0.0 deg`
+- target `10 deg` 对应 far-field peak about `10.0 deg`
+- target `20 deg` 对应 far-field peak about `20.1 deg`
+- two-layer 支撑模型的 amplitude span 低于 one-layer
+
+## 边界
+
+模拟使用代表性、物理可解释参数；它不是 measured spectra、不是 COMSOL/FDTD full-wave calculation，也不声称达到文献中的 9.9 dB modulation 或任何已发表器件效率。正式文献身份、数字和措辞边界见 [`literature_notes.md`](literature_notes.md)。
