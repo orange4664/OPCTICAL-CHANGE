@@ -1,0 +1,29 @@
+# Trellis workspace and unrelated local session traces
+.trellis/workspace/
+.trellis/tasks/archive/
+
+# Tooling and local caches
+.claude/
+.codex/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Temporary and rendered intermediate outputs
+tmp/
+*.tmp
+*.temp
+~$*.docx
+
+# Local virtual environments
+.venv/
+venv/
+env/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
