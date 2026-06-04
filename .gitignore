@@ -1,6 +1,6 @@
 # Trellis workspace and unrelated local session traces
-.trellis/workspace/
-.trellis/tasks/archive/
+**/.trellis/workspace/
+**/.trellis/tasks/archive/
 
 # Tooling and local caches
 .claude/
