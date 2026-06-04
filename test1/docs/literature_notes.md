@@ -55,11 +55,11 @@ This file verifies the short list of literature claims used by the README and PP
   - Adding a second tunable monolayer enables independent amplitude and phase control over the full 0-2pi phase range.
   - It applies the platform to a reconfigurable beam-steering metadevice.
 - Wording caution:
-  - This is supporting evidence for the one-layer vs two-layer TMD amplitude-stability panel. It should not replace the core innovation: electrically controlled strong-coupling beam steering.
+  - This is supporting evidence that amplitude-phase trade-off can be improved by richer hybrid-2D designs. It should not be presented as a completed two-layer simulation in the current project.
 
 ## Project Wording Rules
 
 - It is accurate to say the proposal transfers electrically tunable strong coupling into the excitonic beam-steering setting.
-- It is accurate to use the two-layer TMD result as supporting evidence for more stable amplitude-phase control.
+- It is accurate to use the two-layer TMD result as background motivation for more stable amplitude-phase control.
 - Do not claim that our Python output is experimental data.
 - Do not claim that the proposed design has demonstrated 9.9 dB modulation or 88.5% steering efficiency; those numbers belong to the cited works and should remain context-specific.

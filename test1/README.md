@@ -9,8 +9,8 @@
 - 主论文 A：Melissa Li 等人在 *Nano Letters* 2023 报道的 active vdW MoSe2 excitonic beam steering。
 - 短板：bare exciton 调相位时容易伴随幅度损耗，复杂反射系数 `r=|r|exp(i phi)` 的控制窗口受限。
 - 新方法 B1：hybrid-2D excitonic metasurface 中的 electrically tunable strong coupling，可通过 gate 改变 exciton non-radiative decay / linewidth。
-- 支撑方法 B2：hybrid-2D complex amplitude modulation，说明双 TMD 结构可以作为改善 amplitude-phase control 的路线。
-- 本项目创新 C：把 B1 的电控强耦合机制移植到 A 的 beam-steering 场景，设计 gate-tunable exciton-polariton phased array；B2 只作为第五张图的支撑证据，不替代主创新。
+- 支撑方法 B2：hybrid-2D complex amplitude modulation，说明 amplitude-phase trade-off 是需要正视的设计问题。
+- 本项目创新 C：把 B1 的电控强耦合机制移植到 A 的 beam-steering 场景，设计 gate-tunable exciton-polariton phased array；B2 只作为设计背景，不替代主创新。
 
 选择这个题目而不是备选 SHG/qBIC 组合，是因为它的“设计-预测-控制-测量-验证”闭环最清楚：电压调 exciton linewidth，linewidth 调 complex reflection，相位梯度调 far-field peak，Python 也能给出确定性的预测图。
 
@@ -22,15 +22,20 @@
 2. [`figure_2_complex_reflection_coefficient.png`](output/figures/figure_2_complex_reflection_coefficient.png): design energy 下的 complex reflection path、amplitude 和 phase。
 3. [`figure_3_inverse_gate_profile.png`](output/figures/figure_3_inverse_gate_profile.png): 0、10、20 deg 目标角对应的 inverse-designed gate-voltage profile。
 4. [`figure_4_programmable_beam_steering.png`](output/figures/figure_4_programmable_beam_steering.png): array-factor far-field steering 结果。
-5. [`figure_5_amplitude_compensation.png`](output/figures/figure_5_amplitude_compensation.png): one-layer 与 two-layer TMD amplitude-stability 支撑对比。
+5. [`figure_5_amplitude_compensation.png`](output/figures/figure_5_amplitude_compensation.png): coupled-oscillator model 给出的 phase-amplitude trade-off 与工作能量选择。
+
+[`output/origin/`](output/origin/) 里另有一套 Origin 渲染版本、Origin 工程文件和 CSV 源数据。它们使用同一 Python 模型导出的数据，便于在 Origin 里继续改图；不是 COMSOL/FDTD 结果，也不是额外实验数据。
 
 ## 运行模拟
 
 ```powershell
 python -m pip install -r requirements.txt
 python scripts/make_figures.py --output-dir output/figures
+python scripts/make_origin_figures.py --output-dir output/origin
 pytest
 ```
+
+Origin 导图需要本机已安装 Origin/OriginPro，并能通过 Python `originpro` 包连接到 Origin。没有 Origin 时，`output/origin/source_data/` 下的 CSV 仍可作为手工导入 Origin 的源数据。
 
 ## 模型参数和边界
 
@@ -47,3 +52,4 @@ pytest
 - 4-5 分钟汇报大纲：[`docs/ppt_outline.md`](docs/ppt_outline.md)
 - LaTeX 报告 PDF：[`report/test1_latex_report.pdf`](report/test1_latex_report.pdf)
 - LaTeX 源文件：[`report/test1_latex_report.tex`](report/test1_latex_report.tex)
+- Origin 图和工程：[`output/origin/`](output/origin/)

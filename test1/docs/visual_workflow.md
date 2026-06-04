@@ -55,4 +55,4 @@ The PDF asks for four core simulation panels:
 3. Target-angle-dependent gate voltage profiles.
 4. Far-field beam steering intensity.
 
-This project also includes the fifth Word-file simulation: amplitude-compensated phase modulation comparing one-layer and two-layer TMD designs.
+This project also includes a fifth support panel. The earlier one-layer/two-layer hand-shaped compensation curve has been replaced by a coupled-oscillator-model phase-amplitude trade-off panel, so the figure now stays inside the same simulation chain as the first four panels.

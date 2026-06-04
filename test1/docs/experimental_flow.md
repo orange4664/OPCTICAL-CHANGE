@@ -22,11 +22,11 @@
 - transparent top gate or patterned local gates
 - bottom gate / substrate
 
-支撑拓展：
+支撑分析：
 
-- hBN-separated WS2 / MoSe2 two-layer TMD stack
-- 作用是改善相位扫描时的 amplitude stability
-- 在本项目中对应第五张模拟图，不作为主创新替代项
+- hybrid-2D complex amplitude modulation 文献说明 amplitude-phase trade-off 是实际器件设计里必须处理的问题。
+- 当前第五张图不再使用手工 one-layer/two-layer 补偿曲线，而是回到同一 coupled-oscillator model，比较不同工作能量下 phase span 与 amplitude CV 的取舍。
+- 这仍然是设计模拟，不作为主创新替代项。
 
 ## 测量流程
 
@@ -45,7 +45,7 @@ Python 模拟检查五件事：
 - design energy 下 `r(Vg)` 是否提供可用的 amplitude / phase 控制窗口
 - 目标角是否能反推出可施加的 gate-voltage profile
 - 由这些 voltage 选出的 phase profile 是否能在 array factor 中产生目标 far-field peak
-- two-layer amplitude-stabilized design 是否比 one-layer TMD 在相位扫描时更稳
+- 不同工作能量是否提供不同的 phase-amplitude trade-off，从而指导 design energy 选择
 
 ## 判据
 
@@ -54,7 +54,7 @@ Python 模拟检查五件事：
 - target `0 deg` 对应 far-field peak `0.0 deg`
 - target `10 deg` 对应 far-field peak about `10.0 deg`
 - target `20 deg` 对应 far-field peak about `20.1 deg`
-- two-layer 支撑模型的 amplitude span 低于 one-layer
+- Figure 5 给出工作能量选择中的 phase span / amplitude CV 取舍，避免把手工补偿曲线当成仿真证据
 
 ## 边界
 

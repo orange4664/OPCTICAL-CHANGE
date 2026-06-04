@@ -6,7 +6,6 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .amplitude_compensation import AmplitudeCompensationResult, amplitude_compensation_curve
 from .array_factor import array_factor, metapixel_positions, steering_peak_angle
 from .coupled_oscillator import (
     CoupledOscillatorParameters,
@@ -61,7 +60,6 @@ class BeamSteeringResult:
     far_field_intensity: dict[float, np.ndarray]
     far_field_peak_deg: dict[float, float]
     polariton_energies_ev: tuple[float, float]
-    amplitude_compensation: AmplitudeCompensationResult
 
 
 def run_pipeline(params: SimulationParameters | None = None) -> BeamSteeringResult:
@@ -113,5 +111,4 @@ def run_pipeline(params: SimulationParameters | None = None) -> BeamSteeringResu
         far_field_intensity=far_field,
         far_field_peak_deg=peaks,
         polariton_energies_ev=polariton_energies(p.oscillator),
-        amplitude_compensation=amplitude_compensation_curve(),
     )

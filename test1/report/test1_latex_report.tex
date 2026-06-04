@@ -64,7 +64,7 @@
 \end{equation}
 当 gate voltage 改变 exciton non-radiative decay / linewidth 后，强耦合状态和反射相位随之改变。多个 metapixel 组合成相位梯度，即可把反射光主瓣推到设定角度。
 
-本方案同时保留一个支撑扩展：one-layer TMD 与 two-layer TMD amplitude-stabilized design 的对比。这个扩展用于说明更稳定的 amplitude--phase control 路线，但不替代主创新；主创新仍然是把 electrically tunable strong coupling 转移到 excitonic beam steering 场景。
+本方案同时保留一个支撑分析：amplitude--phase trade-off 是强耦合反射调制中必须正视的设计问题。报告中的第五张图不再使用手工 one-layer/two-layer 补偿曲线，而是回到同一 coupled-oscillator model，比较不同 photon energy 工作点下 phase span 与 amplitude CV 的取舍。
 
 \section{文献基础与可迁移方法}
 
@@ -80,7 +80,7 @@ Tom Hoekstra 和 Jorik van de Groep 的 ``Electrically tunable strong coupling i
 
 \subsection{方法 B2：complex amplitude control}
 
-Hoekstra、Brongersma 和 van de Groep 的 \emph{Nano Letters} 2026 年工作 ``Hybrid-2D Excitonic Metasurfaces for Complex Amplitude Modulation'' 提供了 amplitude--phase control 的支撑思路。该工作数值展示了 hybrid-2D excitonic metasurface 的 independent amplitude and phase control，并指出引入第二层可调 monolayer 可以扩展到完整 $0$--$2\pi$ phase range。这里将该思路压缩为第五组模拟图，用来说明 amplitude stability 可以通过 two-layer TMD route 改善。
+Hoekstra、Brongersma 和 van de Groep 的 \emph{Nano Letters} 2026 年工作 ``Hybrid-2D Excitonic Metasurfaces for Complex Amplitude Modulation'' 提供了 amplitude--phase control 的支撑思路。该工作数值展示了 hybrid-2D excitonic metasurface 的 independent amplitude and phase control，并指出引入第二层可调 monolayer 可以扩展到完整 $0$--$2\pi$ phase range。本报告只把它作为设计背景；第五张图改为由当前 coupled-oscillator model 直接导出的工作能量取舍图。
 
 \section{物理机制与实验设计}
 
@@ -98,7 +98,7 @@ Hoekstra、Brongersma 和 van de Groep 的 \emph{Nano Letters} 2026 年工作 ``
   \item transparent top gate 或 patterned local gates；
   \item bottom gate / substrate。
 \end{itemize}
-支撑拓展可采用 hBN-separated WS2 / MoSe2 two-layer TMD stack，用于增强 amplitude stability。
+支撑拓展可继续考虑 hBN-separated WS2 / MoSe2 two-layer TMD stack，但当前图件只展示 coupled-oscillator model 内部的 phase--amplitude trade-off，不把双层补偿当作已完成仿真。
 
 实验测量流程为：
 \begin{enumerate}
@@ -161,7 +161,7 @@ Python 模型是设计预测模型，不是 full-wave simulation，也不是实�
 \begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{figure_5_amplitude_compensation.png}
-  \caption{Amplitude-compensated phase modulation。one-layer TMD 在相位扫描时 amplitude span 更大；two-layer compensated design 的 peak-to-valley amplitude span 更低。该图作为 amplitude stability 的支撑证据，不是主创新本身。}
+  \caption{Phase--amplitude trade-off from the coupled-oscillator model。不同 photon energy 工作点给出不同的 phase span 与 normalized amplitude fluctuation（CV）。该图用于选择 design energy，替代原先手工 one-layer/two-layer amplitude-compensation 曲线。}
   \label{fig:amplitude-compensation}
 \end{figure}
 
@@ -173,14 +173,16 @@ Python 模型是设计预测模型，不是 full-wave simulation，也不是实�
   \item 在 design energy 下提取可用的 $|r(\vg)|$ 与 $\phi(\vg)$ 控制窗口；
   \item 对目标角反推出可施加的 gate voltage map；
   \item 在 Fourier plane 中验证 reflected far-field peak 是否移动到设定角；
-  \item 比较 single-TMD 与 two-layer TMD route 的 amplitude stability。
+  \item 比较不同工作能量下 phase span 与 amplitude CV 的取舍。
 \end{itemize}
 
-当前 Python 结果给出明确的预测：$0^\circ$、$10^\circ$、$20^\circ$ 三个目标角对应的主瓣位置与设计角一致，two-layer 支撑模型的 amplitude span 低于 one-layer。这说明该 proposal 在模型层面具备自洽的设计--预测--控制--验证链条。
+当前 Python 结果给出明确的预测：$0^\circ$、$10^\circ$、$20^\circ$ 三个目标角对应的主瓣位置与设计角一致，同时 Figure 5 给出工作能量选择时 phase span 与 amplitude CV 的取舍。这说明该 proposal 在模型层面具备自洽的设计--预测--控制--验证链条。
 
 \section{边界与结论}
 
 需要强调的是，本报告中的图来自 deterministic Python design simulation。它们不是 measured spectra，不是 COMSOL/FDTD full-wave calculation，也不代表实验已经完成。文献中的 9.9 dB reflectance modulation 是 B1 optical modulation device 的实验结果，不能直接写成本项目 beam-steering device 的已实现结果。
+
+项目同时导出了 Origin 版本图件和 CSV 源数据，便于后续在 Origin 中继续排版；这些 Origin 图使用同一套 deterministic model data，不构成独立实验或 full-wave 仿真证据。
 
 本项目的价值在于提出了一个可解释、可测试、可用 Python 预验证的创新实验方案：以 active vdW excitonic beam steering 为平台，以 electrically tunable strong coupling 为新机制，把 bare-exciton phased array 推进到 gate-tunable exciton-polariton phased array。若实验中能够完成 $R(E,\vg)$ 测量、complex reflection extraction、voltage-map programming 和 Fourier-plane verification，就可以系统检验电控强耦合在 programmable beam steering 中的作用。
 

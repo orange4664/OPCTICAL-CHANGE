@@ -22,7 +22,7 @@ Electrically Programmable Beam Steering in a Strong-Coupling Hybrid-2D Excitonic
 - B1：Hoekstra and van de Groep, *Light: Science & Applications* 2026；2025 arXiv 预印本历史。
 - 关键机制：gate voltage 改变 carrier density / exciton linewidth，使系统经历 strong-to-weak coupling transition。
 - 已核验背景数字：该光调制器件报道 9.9 dB reflectance modulation；这里只作为机制依据，不说成我们的结果。
-- B2：Hoekstra, Brongersma, van de Groep, *Nano Letters* 2026，用作 amplitude-phase control 支撑。
+- B2：Hoekstra, Brongersma, van de Groep, *Nano Letters* 2026，用作 amplitude-phase trade-off 的设计背景。
 
 ## Slide 3: 我们的创新 C
 
@@ -41,7 +41,7 @@ Electrically Programmable Beam Steering in a Strong-Coupling Hybrid-2D Excitonic
 - 放 `figure_2_complex_reflection_coefficient`: complex reflection path、amplitude、phase。
 - 放 `figure_3_inverse_gate_profile`: 0/10/20 deg 的 voltage profile。
 - 放 `figure_4_programmable_beam_steering`: far-field peak 跟随目标角。
-- 放 `figure_5_amplitude_compensation`: one-layer vs two-layer amplitude-stability 支撑图。
+- 放 `figure_5_amplitude_compensation`: coupled-oscillator model 下的工作能量 phase-amplitude trade-off。
 
 讲法顺序：先说“电压能调单元响应”，再说“单元响应能反推出阵列电压”，最后说“阵列电压在 far field 给出目标主瓣”。
 
@@ -52,11 +52,11 @@ Electrically Programmable Beam Steering in a Strong-Coupling Hybrid-2D Excitonic
 - 样品：non-local dielectric metasurface + hBN/TMD/hBN + gate stack。
 - 光路：tunable laser -> polarizer/objective -> electrically addressable sample -> Fourier-plane imaging -> CCD/sCMOS。
 - 电控：source meter 或 gate array 给 metapixel 施加 voltage profile。
-- 判据：Fourier plane 中主瓣从 `0 deg` 移到设定角，且 amplitude loss 得到控制或由 two-layer 支撑方案改善。
+- 判据：Fourier plane 中主瓣从 `0 deg` 移到设定角，并用 Figure 5 说明工作能量选择如何影响 phase span 与 amplitude CV。
 - 结论：电控强耦合可以把 excitonic beam steering 从 bare-exciton tuning 推进到可编程 exciton-polariton wavefront control。
 
 ## 不要这样说
 
 - 不说 Python 图是实验数据。
 - 不说本项目已经实现 9.9 dB modulation。
-- 不把 two-layer amplitude compensation 说成主创新；它是支撑图。
+- 不把 Figure 5 说成 COMSOL、FDTD 或实验数据；它是同一 coupled-oscillator model 的工作点取舍图。

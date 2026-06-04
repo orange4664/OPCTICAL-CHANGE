@@ -1,6 +1,5 @@
 import numpy as np
 
-from model.amplitude_compensation import amplitude_variation
 from model.array_factor import array_factor, metapixel_positions, steering_peak_angle
 from model.coupled_oscillator import CoupledOscillatorParameters, complex_reflection
 from model.gate_response import exciton_linewidth, gate_grid
@@ -55,9 +54,17 @@ def test_pipeline_steering_peaks_track_targets():
     assert abs(result.far_field_peak_deg[20.0] - 20.0) < 3.5
 
 
-def test_two_layer_amplitude_is_more_stable():
+def test_design_energy_has_phase_amplitude_tradeoff():
     result = run_pipeline()
-    comp = result.amplitude_compensation
-    one_layer_span = amplitude_variation(comp.one_layer_amplitude)
-    two_layer_span = amplitude_variation(comp.two_layer_amplitude)
-    assert two_layer_span < 0.6 * one_layer_span
+    energy_indices = [
+        int(np.argmin(np.abs(result.energy_ev - energy)))
+        for energy in (1.665, result.params.design_energy_ev, 1.725)
+    ]
+    phase_spans = []
+    amplitude_spans = []
+    for idx in energy_indices:
+        response = result.reflection[idx, :]
+        phase_spans.append(float(np.ptp(np.unwrap(np.angle(response)))))
+        amplitude_spans.append(float(np.ptp(np.abs(response))))
+    assert max(phase_spans) > 1.5
+    assert max(amplitude_spans) > min(amplitude_spans)
