@@ -45,3 +45,5 @@ pytest
 - 实验流程说明：[`docs/experimental_flow.md`](docs/experimental_flow.md)
 - 文献核验笔记：[`docs/literature_notes.md`](docs/literature_notes.md)
 - 4-5 分钟汇报大纲：[`docs/ppt_outline.md`](docs/ppt_outline.md)
+- LaTeX 报告 PDF：[`report/test1_latex_report.pdf`](report/test1_latex_report.pdf)
+- LaTeX 源文件：[`report/test1_latex_report.tex`](report/test1_latex_report.tex)
