@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,13 @@ COLORS = {
     "purple": "#7c3aed",
 }
 
+PDF_METADATA = {
+    "CreationDate": datetime(2026, 6, 4, tzinfo=timezone.utc),
+    "ModDate": datetime(2026, 6, 4, tzinfo=timezone.utc),
+    "Creator": "test1/scripts/make_figures.py",
+    "Producer": "Matplotlib",
+}
+
 
 def _configure_style() -> None:
     mpl.rcParams.update(
@@ -72,7 +80,7 @@ def _save(fig: mpl.figure.Figure, output_dir: Path, basename: str) -> list[Path]
         if path.suffix == ".png":
             fig.savefig(path, dpi=320, bbox_inches="tight")
         else:
-            fig.savefig(path, bbox_inches="tight")
+            fig.savefig(path, bbox_inches="tight", metadata=PDF_METADATA)
     plt.close(fig)
     return paths
 
